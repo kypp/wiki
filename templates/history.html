@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div id="toolbar">
+		<span class="links">
+			{% if user %}
+				<a href="/_edit{{pagename}}">edit</a> | 
+			{% endif %}
+			<a href="{{pagename}}">view</a>
+		</span>
+		<span class="username">
+			{% if user %}
+				{{user.name}} (<a href="/logout">logout</a>)
+			{% else %}
+				<a href="/login">login</a> | <a href="/signup">signup</a>
+			{% endif %}
+		</span>
+	</div>
+	<div class="history">
+	{% set linecount = history|length %}
+	{% for line in history %}
+		<div class="histline">
+			<span class="datetime">{{line.created.ctime()}}</span>
+			{% set cont = line.content if (line.content|length < 200) else (line.content[0:197] + "...") %}
+			<span class="rawcode">{{ cont | e}}</span>
+			<span class="histbutt">
+				<a href="{{pagename}}?v={{linecount}}">view</a>  
+				<a href="/_edit{{pagename}}">edit</a>
+			</span>
+		</div>
+		{% set linecount = linecount - 1 %}
+	{% endfor %}
+	</div>
+	
+{% endblock %}

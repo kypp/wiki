@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div id="toolbar">
+		<span class="links">
+			<a href="{{pagename}}">view</a> | <a href="/_history{{pagename}}">history</a>
+		</span>
+		<span class="username">
+			{{user.name}} (<a href="/logout">logout</a>)
+		</span>
+	</div>
+	<div class="pageinput">
+		<form method="post">
+			<textarea name="content">{{content}}</textarea>
+			<input type="submit">
+		</form>
+	</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div id="toolbar">
+		<span class="links">
+			{% if user %}
+				<a href="/_edit{{pagename}}">edit</a> | 
+			{% endif %}
+			<a href="/_history{{pagename}}">history</a>
+		</span>
+		<span class="username">
+			{% if user %}
+				{{user.name}} (<a href="/logout">logout</a>)
+			{% else %}
+				<a href="/login">login</a> | <a href="/signup">signup</a>
+			{% endif %}
+		</span>
+	</div>
+	<div class="content">
+	{{content}}
+	</div>
+{% endblock %}
